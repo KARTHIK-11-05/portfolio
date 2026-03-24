@@ -1,0 +1,125 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 100;
+    padding: 0;
+    background-color: hsl(207, 41%, 31%);
+    color:rgb(255, 255, 255);
+}
+
+h1, h2, h3 {
+    margin: 0;
+}
+.img{
+    margin-right: 10px;
+    align-items:end;
+}
+.img img{
+    width: 100px; /* Set width of the image */
+    height: 100px; /* Set height of the image */
+    border-radius: 50%; /* Circular frame */
+    border: 3px solid #00ff0d; /* Optional: Border around the image */
+    object-fit: cover;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    background-color:#8b5757;
+    color: white(253, 250, 250);
+    padding: 20px 0;
+    text-align: center;
+}
+/* header:hover{
+    background-color:#0B60B0;
+} */
+
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+}
+nav ul li a:hover {
+    color: white;
+    text-decoration: none;
+    background-color: #70c790;
+}
+
+section {
+    padding: 50px 0;
+    text-align: center;
+}
+section:hover {
+    padding: 60px 0;
+    background-color: #333;
+}
+
+.skill-list {
+    display: flex;
+    justify-content: space-around;
+}
+
+.skill-item {
+    width: 20%;
+}
+
+.skill-bar {
+    background-color: #ddd;
+    height: 10px;
+    margin: 10px 0;
+}
+.skill-list1 {
+    display: flex;
+    justify-content: space-around;
+}
+
+.skill-item1 {
+    width: 20%;
+}
+
+.skill-bar1 {
+    background-color: #9f8787;
+    height: 10px;
+    margin: 10px 0;
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    padding: 10px 0;
+    text-align: center;
+}
+
+form input, form textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+form button {
+    background-color:#2196F3;
+    color: white;
+    padding: 10px 30px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color:rgb(163, 127, 73);
+    color:#e37272;
+}
