@@ -33,7 +33,17 @@ app.post('/api/contact', async (req, res) => {
       from: email,
       to: 'koradavenkatakarthik@gmail.com',
       subject: `Portfolio Message from ${name}`,
-      text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`
+      html: `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e0e0e0; border-radius: 10px;">
+          <h2 style="color: #333; border-bottom: 2px solid #007bff; padding-bottom: 10px;">New Portfolio Contact</h2>
+          <p><strong>Name:</strong> ${name}</p>
+          <p><strong>Email:</strong> ${email}</p>
+          <div style="background-color: #f9f9f9; padding: 15px; border-left: 4px solid #007bff; margin-top: 20px; font-style: italic;">
+            <p style="margin: 0; white-space: pre-wrap;">${message}</p>
+          </div>
+          <p style="margin-top: 30px; font-size: 12px; color: #888; text-align: center;">This message was automatically generated from your Portfolio contact form.</p>
+        </div>
+      `
     });
     console.log("Message sent: %s", info.messageId);
     res.status(200).json({ success: true, message: "Email sent perfectly." });

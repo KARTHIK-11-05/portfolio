@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { Mail, Github, Linkedin, ExternalLink, Code, Database, Cpu, Menu, X, Smartphone, Terminal, GraduationCap, ChevronRight, BookOpen, Trophy, Sun, Moon, Send, FileText } from 'lucide-react';
 import './App.css';
 import profileImg from './profile.jpg';
-import resumePdf from '../details/Korada_Venkata_Karthik_Resume.pdf';
+const resumePdf = '/details/Korada_Venkata_Karthik_Resume.pdf';
 
 const App = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
