@@ -16,10 +16,10 @@
 
 [data-theme='light'] {
   --bg-color:#738092 ;
-  --text-color: #0f172a;
-  --muted-color: #475569;
+  --text-color: #0f0f0f;
+  --muted-color: #060606;
   --primary-color: #451111;
-  --secondary-color: #4f46e5;
+  --secondary-color: #000006;
   --card-bg: #977b7b;
   --card-border: rgba(0, 0, 0, 0.08);
   --nav-bg: rgba(241, 245, 249, 0.7); /* Slightly more transparent */
@@ -214,13 +214,15 @@ body {
 }
 
 .hero-social {
-  display: flex;
-  gap: 1.2rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
 }
 
 .hero-social a {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 0.6rem;
   color: var(--text-color);
   text-decoration: none;
@@ -239,6 +241,14 @@ body {
   background: var(--primary-color);
   color: white;
 }
+
+.hero-social a.btn-github:hover { border-color: #333; background: #333; color: white !important; }
+[data-theme='light'] .hero-social a.btn-github:hover { border-color: #000; background: #000; color: white !important; }
+.hero-social a.btn-linkedin:hover { border-color: #0A66C2; background: #0A66C2; color: white !important; }
+.hero-social a.btn-resume:hover { border-color: #EA4335; background: #EA4335; color: white !important; }
+.hero-social a.btn-leetcode:hover { border-color: #F89F1B; background: #F89F1B; color: white !important; }
+.hero-social a.btn-hackerrank:hover { border-color: #2EC866; background: #2EC866; color: white !important; }
+.hero-social a.btn-codolio:hover { border-color: #8A2BE2; background: #8A2BE2; color: white !important; }
 
 .hero-img-container {
   flex: 0.9;
@@ -408,6 +418,33 @@ body {
   color: white;
   border-radius: 8px;
   box-shadow: 0 5px 15px rgba(0, 210, 255, 0.3);
+  display: inline-block;
+}
+
+.project-github-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-left: 1rem;
+  color: var(--text-color);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.85rem;
+  padding: 0.4rem 1rem;
+  border-radius: 8px;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  transition: 0.3s;
+}
+
+.project-github-link:hover {
+  background: #333;
+  color: white;
+  border-color: #333;
+}
+[data-theme='light'] .project-github-link:hover {
+  background: #000;
+  border-color: #000;
 }
 
 /* Education & Achievements */

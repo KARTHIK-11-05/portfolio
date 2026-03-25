@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Github, Linkedin, ExternalLink, Code, Database, Cpu, Menu, X, Smartphone, Terminal, GraduationCap, ChevronRight, BookOpen, Trophy, Sun, Moon, Send } from 'lucide-react';
+import { Mail, Github, Linkedin, ExternalLink, Code, Database, Cpu, Menu, X, Smartphone, Terminal, GraduationCap, ChevronRight, BookOpen, Trophy, Sun, Moon, Send, FileText } from 'lucide-react';
 import './App.css';
 import profileImg from './profile.jpg';
+import resumePdf from '../details/Korada_Venkata_Karthik_Resume.pdf';
 
 const App = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -20,12 +21,27 @@ const App = () => {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleEmailSubmit = (e) => {
+  const handleEmailSubmit = async (e) => {
     e.preventDefault();
     const { name, email, message } = formData;
-    const subject = encodeURIComponent(`Portfolio Message from ${name}`);
-    const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
-    window.location.href = `mailto:koradavenkatakarthik@gmail.com?subject=${subject}&body=${body}`;
+    
+    try {
+      const response = await fetch('http://localhost:5000/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, message })
+      });
+      
+      if (response.ok) {
+        alert("Message sent successfully!");
+        setFormData({ name: '', email: '', message: '' });
+      } else {
+        alert("Failed to send message. Please try again.");
+      }
+    } catch (error) {
+      console.error(error);
+      alert("Error sending message. Check connection.");
+    }
   };
 
   const skills = [
@@ -48,7 +64,8 @@ const App = () => {
       title: 'CivicLens – Smart Issue Reporting',
       desc: 'Platform for reporting civic issues with Google Maps integration and AI-generated descriptions from GPS-tagged images.',
       tech: 'React, Google Maps API, AI/ML',
-      icon: <Smartphone size={32} />
+      icon: <Smartphone size={32} />,
+      github: 'https://github.com/KARTHIK-11-05/civic-eye'
     },
     {
       title: 'Business Management System',
@@ -60,7 +77,8 @@ const App = () => {
       title: 'Car Showroom Management',
       desc: 'Full-stack application to manage car inventory, tracking availability, pricing, and showroom operations.',
       tech: 'MEAN Stack, REST APIs',
-      icon: <Code size={32} />
+      icon: <Code size={32} />,
+      github: 'https://github.com/KARTHIK-11-05/Car-Showroom-Mean-'
     }
   ];
 
@@ -100,11 +118,12 @@ const App = () => {
             <h1 className="hero-name">KORADA VENKATA <span>KARTHIK</span></h1>
             <p className="hero-tag">B.Tech Student (CSE - AI & ML) | Parul University</p>
             <div className="hero-social">
-              <a href="https://github.com/KARTHIK-11-05" target="_blank" rel="noreferrer"><Github size={20} /> GitHub</a>
-              <a href="https://www.linkedin.com/in/korada-venkata-karthik-a70702326/" target="_blank" rel="noreferrer"><Linkedin size={20} /> LinkedIn</a>
-              <a href="https://leetcode.com/u/korada_venkata_karthik/" target="_blank" rel="noreferrer"><Code size={20} /> LeetCode</a>
-              <a href="https://www.hackerrank.com/profile/koradavenkataka1" target="_blank" rel="noreferrer"><Terminal size={20} /> HackerRank</a>
-              <a href="https://codolio.com/profile/K.V.Karthik" target="_blank" rel="noreferrer"><Cpu size={20} /> Codolio</a>
+              <a href="https://github.com/KARTHIK-11-05" target="_blank" rel="noreferrer" className="btn-github"><Github size={20} /> GitHub</a>
+              <a href="https://www.linkedin.com/in/korada-venkata-karthik-a70702326/" target="_blank" rel="noreferrer" className="btn-linkedin"><Linkedin size={20} /> LinkedIn</a>
+              <a href={resumePdf} download="Korada_Venkata_Karthik_Resume.pdf" className="btn-resume"><FileText size={20} /> Resume</a>
+              <a href="https://leetcode.com/u/korada_venkata_karthik/" target="_blank" rel="noreferrer" className="btn-leetcode"><Code size={20} /> LeetCode</a>
+              <a href="https://www.hackerrank.com/profile/koradavenkataka1" target="_blank" rel="noreferrer" className="btn-hackerrank"><Terminal size={20} /> HackerRank</a>
+              <a href="https://codolio.com/profile/K.V.Karthik" target="_blank" rel="noreferrer" className="btn-codolio"><Cpu size={20} /> Codolio</a>
             </div>
           </motion.div>
           
@@ -173,7 +192,14 @@ const App = () => {
                 <div className="project-detail">
                   <h3>{project.title}</h3>
                   <p>{project.desc}</p>
-                  <span className="tech-badge">{project.tech}</span>
+                  <div>
+                    <span className="tech-badge">{project.tech}</span>
+                    {project.github && (
+                      <a href={project.github} target="_blank" rel="noreferrer" className="project-github-link">
+                        <Github size={18} /> Code
+                      </a>
+                    )}
+                  </div>
                 </div>
               </motion.div>
             ))}
