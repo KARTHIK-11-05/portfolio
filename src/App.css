@@ -1,30 +1,42 @@
 :root {
   /* Dark Theme (Default) */
-  --bg-color: #020617;
-  --text-color: #f8fafc;
-  --muted-color: #94a3b8;
-  --primary-color: #00d2ff;
-  --secondary-color: #3a7bd5;
-  --card-bg: rgba(255, 255, 255, 0.03);
-  --card-border: rgba(255, 255, 255, 0.1);
-  --nav-bg: rgba(2, 6, 23, 0.7); /* Slightly more transparent */
-  --secondary-bg: rgba(255, 255, 255, 0.02);
+  --bg-color: #030712;
+  --text-color: #f9fafb;
+  --muted-color: #9ca3af;
+  --primary-color: #06b6d4;
+  --secondary-color: #54f63b;
+  --card-bg: rgba(17, 24, 39, 0.4);
+  --card-border: rgba(255, 255, 255, 0.06);
+  --nav-bg: rgba(3, 7, 18, 0.7);
+  --secondary-bg: rgba(17, 24, 39, 0.25);
   --gradient: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-  --shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-  --input-bg: rgba(255, 255, 255, 0.05);
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  --input-bg: rgba(17, 24, 39, 0.65);
+  --mobile-menu-bg: rgba(3, 7, 18, 0.85);
+  --mobile-menu-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
+  --bg-glow-1: rgba(6, 182, 212, 0.07); /* Slightly higher glow visibility on pattern */
+  --bg-glow-2: rgba(59, 130, 246, 0.07);
+  --bg-image: url('https://img.magnific.com/premium-photo/mesmerizing-3d-black-geometric-patterned-background_1000124-90888.jpg');
 }
 
 [data-theme='light'] {
-  --bg-color:#738092 ;
-  --text-color: #0f0f0f;
-  --muted-color: #060606;
-  --primary-color: #451111;
-  --secondary-color: #000006;
-  --card-bg: #977b7b;
-  --card-border: rgba(0, 0, 0, 0.08);
-  --nav-bg: rgba(241, 245, 249, 0.7); /* Slightly more transparent */
-  --secondary-bg: #a17676;
-  --input-bg: #c9aeb5;
+  --bg-color: #f8fafc;
+  --text-color: #0f172a;
+  --muted-color: #475569;
+  --primary-color: #031b26;
+  --secondary-color: #0d5f01;
+  --card-bg: rgba(255, 255, 255, 0.45);
+  --card-border: rgba(148, 163, 184, 0.12);
+  --nav-bg: rgba(248, 250, 252, 0.75);
+  --secondary-bg: rgba(241, 245, 249, 0.5);
+  --input-bg: rgba(255, 255, 255, 0.75);
+  --shadow: 0 10px 30px rgba(15, 23, 42, 0.04);
+  --mobile-menu-bg: rgba(248, 250, 252, 0.85);
+  --mobile-menu-shadow: -10px 0 30px rgba(15, 23, 42, 0.08);
+  --bg-glow-1: rgba(59, 130, 246, 0.03);
+  --bg-glow-2: rgba(6, 182, 212, 0.03);
+  /* --bg-image: linear-gradient(to bottom, transparent, transparent); */
+  --bg-image: url("https://static.vecteezy.com/system/resources/thumbnails/068/563/980/small_2x/the-serene-and-captivating-blue-textured-backdrop-for-creativegraphy-photo.jpeg");
 }
 
 /* Global Styles */
@@ -37,6 +49,26 @@
 html {
   scroll-behavior: smooth;
   scrollbar-width: none;
+  background-color: var(--bg-color);
+}
+
+.fixed-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -9999;
+  pointer-events: none;
+  background-color: var(--bg-color);
+  background-image: 
+    radial-gradient(circle at 10% 20%, var(--bg-glow-1) 0%, transparent 40%),
+    radial-gradient(circle at 90% 80%, var(--bg-glow-2) 0%, transparent 40%),
+    var(--bg-image);
+  background-size: auto, auto, cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: background-color 0.4s ease;
 }
 
 html::-webkit-scrollbar {
@@ -45,11 +77,9 @@ html::-webkit-scrollbar {
 
 body {
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  background-color: var(--bg-color);
   color: var(--text-color);
   line-height: 1.6;
   overflow-x: hidden;
-  transition: background-color 0.4s ease, color 0.4s ease;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -349,65 +379,96 @@ body {
   font-weight: 900;
 }
 
-/* Premium Projects Overhaul */
+/* Premium Projects Grid Overhaul */
 .projects-list {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 2.5rem;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
   width: 100%;
-  max-width: 950px;
+  max-width: 1100px;
   margin: 0 auto;
 }
 
-.project-row {
-  display: flex;
-  align-items: center;
-  gap: 3rem;
-  padding: 3rem;
-  text-align: left;
-}
-
-.project-row:nth-child(even) {
-  flex-direction: row-reverse;
-  text-align: right;
-}
-
-.project-row:nth-child(even) .project-detail {
+.project-card {
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  padding: 2.5rem;
+  gap: 1.5rem;
+  border-radius: 20px;
+  height: 100%;
 }
 
 .project-icon-box {
   background: var(--gradient);
-  padding: 1.5rem;
-  border-radius: 20px;
-  width: 80px;
-  height: 80px;
+  padding: 1.2rem;
+  border-radius: 16px;
+  width: 60px;
+  height: 60px;
   display: flex;
   justify-content: center;
   align-items: center;
   color: white;
-  box-shadow: 0 10px 30px rgba(0, 210, 255, 0.2);
+  box-shadow: 0 10px 30px rgba(0, 210, 255, 0.15);
   flex-shrink: 0;
 }
 
-.project-detail {
-  flex: 1;
+.project-info {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
 }
 
-.project-detail h3 {
-  font-size: 1.8rem;
-  margin: 0 0 1rem;
-  font-weight: 900;
+.project-info h3 {
+  font-size: 1.4rem;
+  font-weight: 800;
   letter-spacing: -0.5px;
+  margin: 0;
 }
 
-.project-detail p {
-  font-size: 1rem;
+.project-info p {
+  font-size: 0.95rem;
   color: var(--muted-color);
-  margin-bottom: 1.8rem;
-  max-width: 600px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.project-meta {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: auto; /* Push metadata to the bottom of the card */
+}
+
+/* Coming Soon Card Custom Styling */
+.coming-soon-card {
+  border: 1px dashed var(--primary-color);
+  opacity: 0.85;
+  transition: all 0.3s ease;
+}
+
+.coming-soon-card:hover {
+  opacity: 1;
+  border-style: solid;
+  transform: translateY(-4px);
+}
+
+.coming-soon-badge {
+  background: var(--muted-color) !important;
+  opacity: 0.8;
+  color: var(--bg-color) !important;
+}
+
+.coming-soon-icon {
+  background: linear-gradient(135deg, var(--muted-color), var(--secondary-color)) !important;
+  animation: pulse 2s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.05); opacity: 1; }
+  100% { transform: scale(1); opacity: 0.8; }
 }
 
 .tech-badge {
@@ -417,7 +478,7 @@ body {
   background: var(--primary-color);
   color: white;
   border-radius: 8px;
-  box-shadow: 0 5px 15px rgba(0, 210, 255, 0.3);
+  box-shadow: 0 5px 15px rgba(0, 210, 255, 0.15);
   display: inline-block;
 }
 
@@ -425,7 +486,6 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  margin-left: 1rem;
   color: var(--text-color);
   text-decoration: none;
   font-weight: 700;
@@ -454,6 +514,23 @@ body {
   gap: 3rem;
   width: 100%;
   align-items: start;
+}
+
+/* Structure on laptop/desktop:
+   - Education: left column, spans 2 rows
+   - Achievements + Certificates: stacked on the right (same column)
+*/
+.edu-achieve-grid > :nth-child(1) { /* edu-box */
+  grid-column: 1;
+  grid-row: 1 / span 2;
+}
+.edu-achieve-grid > :nth-child(2) { /* achieve-box: Achievements */
+  grid-column: 2;
+  grid-row: 1;
+}
+.edu-achieve-grid > :nth-child(3) { /* achieve-box: Certificates */
+  grid-column: 2;
+  grid-row: 2;
 }
 
 .edu-box h3, .achieve-box h3 {
@@ -486,16 +563,10 @@ body {
   max-width: 1000px;
 }
 
-/* Fix: Remove light mode color change on hover for contact components */
-[data-theme='light'] .contact-form:hover,
-[data-theme='light'] .contact-item:hover {
-  background: var(--card-bg);
-}
-
-/* Fix: Remove light mode background change on focus for form fields */
-[data-theme='light'] .form-group input:focus,
-[data-theme='light'] .form-group textarea:focus {
-  background: var(--input-bg);
+.form-group input::placeholder, 
+.form-group textarea::placeholder {
+  color: var(--muted-color);
+  opacity: 0.6;
 }
 
 .contact-info-grid {
@@ -613,11 +684,11 @@ body {
     width: 250px;
     height: 100vh;
     flex-direction: column;
-    background: rgba(2, 6, 23, 0.6); /* More transparent mobile menu */
-    backdrop-filter: blur(25px); /* Stronger blur for glass effect */
+    background: var(--mobile-menu-bg);
+    backdrop-filter: blur(25px);
     padding: 100px 40px;
     transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+    box-shadow: var(--mobile-menu-shadow);
     z-index: 1001;
   }
   .nav-links.active { right: 0; }
@@ -628,13 +699,18 @@ body {
     flex-direction: column-reverse; 
     text-align: center; 
     gap: 2.5rem;
-    padding-top: 2rem; /* Spacing from top/navbar */
+    padding-top: 5rem; /* Spacing from top/navbar to avoid overlap */
   }
   .hero-img-container { flex: 0 0 auto; }
   .circle-image { width: 240px; height: 240px; margin: 0 auto; }
   .circle-border { width: 264px; height: 264px; top: -12px; left: -12px; }
   .hero-name { font-size: 2.8rem; }
-  .hero-social { justify-content: center; flex-wrap: wrap; }
+  .hero-social { 
+    display: flex !important;
+    justify-content: center; 
+    flex-wrap: wrap; 
+    gap: 0.8rem;
+  }
   
   /* Layout Mobile */
   .full-screen { min-height: auto; padding: 60px 0; }
@@ -642,9 +718,25 @@ body {
   .section-title { font-size: 2.2rem; margin-bottom: 2.5rem; }
   .summary-box { padding: 2rem; font-size: 1rem; }
   .skills-grid { grid-template-columns: 1fr; gap: 1.5rem; }
-  .project-row { padding: 2rem; gap: 1.5rem; }
-  .project-row:nth-child(even) { flex-direction: column; }
-  .project-row:nth-child(even) .project-detail { align-items: center; }
+  
+  /* Projects Mobile Fix */
+  .projects-list {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  .project-card {
+    padding: 2rem;
+    align-items: center;
+    text-align: center;
+  }
+  .project-info {
+    align-items: center;
+  }
+  .project-meta {
+    justify-content: center !important;
+    margin-top: 1rem;
+  }
+  
   .edu-achieve-grid { grid-template-columns: 1fr; gap: 2rem; }
   .contact-container { padding: 0; }
   .contact-form { padding: 2rem; }
